@@ -6,10 +6,10 @@ interface DebtFormProps {
 }
 
 const DebtForm: React.FC<DebtFormProps> = ({ onSubmit }) => {
-  const [amount, setAmount] = useState('');
-  const [name, setName] = useState('');
+  const [amount, setAmount] = useState<string>('');
+  const [name, setName] = useState<string>('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (amount && name) {
       const debt = { name, amount: parseFloat(amount) };
@@ -22,7 +22,9 @@ const DebtForm: React.FC<DebtFormProps> = ({ onSubmit }) => {
           },
           body: JSON.stringify(debt),
         });
-        const data = await response.json();
+
+        const data: any = await response.json();
+
         if (response.ok) {
           onSubmit(debt);
           setAmount('');
@@ -67,5 +69,4 @@ const DebtForm: React.FC<DebtFormProps> = ({ onSubmit }) => {
   );
 };
 
-// Export the component as a module
 export default DebtForm;

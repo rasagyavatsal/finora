@@ -1,12 +1,26 @@
 from fastapi import FastAPI, File, UploadFile
 from pathlib import Path
 
+# Create the FastAPI app
 app = FastAPI()
 
-@app.post("/upload/")
+# Define a basic root route
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the file upload API!"}
+
+# Define the file upload route
+@app.post("/upload-bank-statement/")
 async def upload_file(file: UploadFile = File(...)):
+    # Define the upload folder
+    upload_folder = Path("uploads")
+    upload_folder.mkdir(parents=True, exist_ok=True)  # Ensure folder exists
+
+    # Define the file location to save the uploaded file
+    file_location = upload_folder / file.filename
+    
     # Save the uploaded file
-    file_location = Path(f"uploaded_files/{file.filename}")
     with open(file_location, "wb") as f:
         f.write(file.file.read())
-    return {"filename": file.filename}
+    
+    return {"filename": file.filename, "message": "File uploaded successfully!"}
