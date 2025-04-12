@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: gemini-fastapi
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: ./start.sh
-    envVars:
-      - key: GEMINI_API_KEY
-        value: AIzaSyBHtgjlu6ALEoEHVSM9g3WoeHJ_gDMUa7Y

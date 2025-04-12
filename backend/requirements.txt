@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-pandas
-pdfplumber
-openpyxl
-python-multipart
-google-generativeai
