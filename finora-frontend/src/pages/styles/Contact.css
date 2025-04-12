@@ -1,0 +1,140 @@
+/* Base styles for the Contact page */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom right, #90e0ef, #0077b6); /* Gradient background */
+    color: #1f2937;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Contact page container */
+  .contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Header Section */
+  header {
+    background-color: #0077b6;
+    padding: 20px;
+    color: white;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  nav {
+    margin-top: 10px;
+  }
+  
+  nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #90e0ef; /* Light blue for hover */
+  }
+  
+  /* Main content section */
+  main {
+    margin: 40px 0;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 3rem;
+    color: #1e3a8a; /* Dark blue for title */
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    color: #2d3748; /* Dark gray for text */
+    margin-bottom: 30px;
+  }
+  
+  form {
+    background: rgba(255, 255, 255, 0.8); /* Light white background for form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #0077b6;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  input:focus,
+  textarea:focus {
+    border-color: #90e0ef; /* Light blue on focus */
+    outline: none;
+  }
+  
+  button {
+    background-color: #0077b6; /* Blue button */
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #0096c7; /* Lighter blue on hover */
+  }
+  
+  /* Footer Section */
+  footer {
+    background-color: #0077b6;
+    color: white;
+    padding: 20px;
+  }
+  
+  footer p {
+    font-size: 1rem;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    h2 {
+      font-size: 2rem; /* Adjust title size for mobile */
+    }
+  
+    p {
+      font-size: 1rem; /* Adjust text size for mobile */
+    }
+  
+    form {
+      padding: 20px; /* Smaller form padding on mobile */
+    }
+  
+    button {
+      padding: 10px 20px; /* Smaller button on mobile */
+    }
+  }
+  

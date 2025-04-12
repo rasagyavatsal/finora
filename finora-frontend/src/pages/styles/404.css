@@ -1,0 +1,78 @@
+/* Base styles for the 404 page */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom right, #90e0ef, #0077b6); /* Gradient background */
+    color: #1f2937;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* 404 page container */
+  .not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 7rem; /* Large 404 text */
+    font-weight: 900;
+    color: #0077b6; /* Futuristic blue */
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 20px;
+    color: #1f2937; /* Dark gray text */
+    margin-bottom: 10px;
+  }
+  
+  p.text-blue-900 {
+    font-size: 24px;
+    color: #1e3a8a; /* Dark blue for the subtitle */
+  }
+  
+  button {
+    background-color: #0077b6; /* Blue button */
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #0096c7; /* Lighter blue on hover */
+  }
+  
+  /* Link styles */
+  a {
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+    color: #90e0ef; /* Light blue for the link hover */
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 4rem; /* Adjust 404 size for smaller screens */
+    }
+  
+    p {
+      font-size: 18px; /* Adjust text size for mobile */
+    }
+  
+    button {
+      padding: 10px 20px; /* Smaller button on mobile */
+    }
+  }
+  

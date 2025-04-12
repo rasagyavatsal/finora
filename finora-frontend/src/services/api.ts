@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 // Function to upload file
 export const uploadFile = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append("file", file);
 
   try {
-    const response = await axios.post("http://127.0.0.1:8000/upload", formData, {
+    const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -21,7 +23,7 @@ export const uploadFile = async (file: File): Promise<string> => {
 // Function to send user query to Gemini AI chatbot
 export const chatWithBot = async (question: string, financialSummary: string): Promise<string> => {
   try {
-    const response = await axios.post("http://127.0.0.1:8000/chat", {
+    const response = await axios.post(`${API_BASE_URL}/chat`, {
       question: question,
       financial_summary: financialSummary,
     });

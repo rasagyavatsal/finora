@@ -1,4 +1,5 @@
 // src/pages/404.tsx
+import './styles/404.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
