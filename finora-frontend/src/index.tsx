@@ -1,12 +1,12 @@
+// src/index.tsx
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { BrowserRouter as Router } from "react-router-dom"; // If using routing
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import AppRouter from "./AppRouter";
 
-// Render the App component
-ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-  document.getElementById("root")
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+root.render(
+  <React.StrictMode>
+    <AppRouter />
+  </React.StrictMode>
 );

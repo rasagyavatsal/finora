@@ -1,25 +1,19 @@
-// src/components/Navbar.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Flex, Text, Button } from '@chakra-ui/react'; // Chakra UI components
 
 const Navbar: React.FC = () => {
   return (
-    <Box bg="teal.500" color="white" p={4}>
-      <Flex justify="space-between" align="center">
-        <Text fontSize="2xl" fontWeight="bold">
-          Finora
-        </Text>
-        <Flex>
-          <Button variant="link" color="white" mr={4}>
-            <Link to="/">Home</Link>
-          </Button>
-          <Button variant="link" color="white">
-            <Link to="/about">About</Link>
-          </Button>
-        </Flex>
-      </Flex>
-    </Box>
+    <nav className="bg-blue-700 text-white p-4 flex justify-between items-center">
+      <div className="font-bold text-lg">Finora</div>
+      <div className="space-x-4">
+        <Link to="/" className="hover:underline">
+          Home
+        </Link>
+        <Link to="/about" className="hover:underline">
+          About
+        </Link>
+      </div>
+    </nav>
   );
 };
 

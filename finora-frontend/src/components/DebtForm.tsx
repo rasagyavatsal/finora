@@ -1,71 +1,50 @@
 import React, { useState } from 'react';
-import { Box, FormControl, FormLabel, Input, Button, VStack } from '@chakra-ui/react';
 
 interface DebtFormProps {
   onSubmit: (debt: { amount: number; name: string }) => void;
 }
 
 const DebtForm: React.FC<DebtFormProps> = ({ onSubmit }) => {
-  const [amount, setAmount] = useState<string>('');
-  const [name, setName] = useState<string>('');
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (amount && name) {
-      const debt = { name, amount: parseFloat(amount) };
-
-      try {
-        const response = await fetch('/api/debts', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(debt),
-        });
-
-        const data: any = await response.json();
-
-        if (response.ok) {
-          onSubmit(debt);
-          setAmount('');
-          setName('');
-        } else {
-          alert(data.message || 'Failed to add debt');
-        }
-      } catch (error) {
-        alert('Error: ' + error);
-      }
-    }
+    if (!name || !amount) return;
+    onSubmit({ name, amount: parseFloat(amount) });
+    setName('');
+    setAmount('');
   };
 
   return (
-    <Box maxW="sm" mx="auto" p={5}>
-      <form onSubmit={handleSubmit}>
-        <VStack spacing={4} align="flex-start">
-          <FormControl isRequired>
-            <FormLabel>Debt Name</FormLabel>
-            <Input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter debt name"
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Amount</FormLabel>
-            <Input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="Enter amount"
-            />
-          </FormControl>
-          <Button type="submit" colorScheme="teal" width="full">
-            Add Debt
-          </Button>
-        </VStack>
+    <div className="max-w-sm mx-auto p-4 border rounded bg-white shadow">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block font-medium mb-1">Debt Name</label>
+          <input
+            className="w-full border p-2 rounded"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">Amount</label>
+          <input
+            className="w-full border p-2 rounded"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            type="number"
+            required
+          />
+        </div>
+
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+          Add Debt
+        </button>
       </form>
-    </Box>
+    </div>
   );
 };
 
