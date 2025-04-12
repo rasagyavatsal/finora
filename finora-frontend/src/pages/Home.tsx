@@ -1,5 +1,6 @@
 // src/pages/Home.tsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -8,9 +9,9 @@ const Home = () => {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Finora</h1>
           <nav className="space-x-6">
-            <a href="/" className="hover:text-blue-200">Home</a>
-            <a href="/about" className="hover:text-blue-200">About</a>
-            <a href="/contact" className="hover:text-blue-200">Contact</a>
+            <Link to="/" className="hover:text-blue-200">Home</Link>
+            <Link to="/about" className="hover:text-blue-200">About</Link>
+            <Link to="/contact" className="hover:text-blue-200">Contact</Link>
           </nav>
         </div>
       </header>
@@ -20,11 +21,11 @@ const Home = () => {
         <p className="text-lg text-gray-700 mt-4">Your trusted personal finance assistant.</p>
 
         <div className="mt-10">
-          <a href="/about">
+          <Link to="/about">
             <button className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700">
               Learn More About Us
             </button>
-          </a>
+          </Link>
         </div>
       </main>
 

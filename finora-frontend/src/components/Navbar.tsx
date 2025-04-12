@@ -1,18 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   return (
-    <nav className="bg-blue-700 text-white p-4 flex justify-between items-center">
-      <div className="font-bold text-lg">Finora</div>
-      <div className="space-x-4">
-        <Link to="/" className="hover:underline">
-          Home
-        </Link>
-        <Link to="/about" className="hover:underline">
-          About
-        </Link>
-      </div>
+    <nav>
+      <Link to="/">Home</Link> |{" "}
+      <Link to="/about">About</Link> |{" "}
+      <Link to="/contact">Contact</Link>
     </nav>
   );
 };

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -19,8 +19,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-const AppRouter: FC = () => {
-  return <RouterProvider router={router} />;
-};
+const AppRouter = () => <RouterProvider router={router} />;
 
 export default AppRouter;
