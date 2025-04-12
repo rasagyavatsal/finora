@@ -51,18 +51,20 @@ async def chat_with_gemini(query: UserQuery):
             [f"{k.replace('_', ' ').title()} Debt: {v}" for k, v in debt_data.items() if isinstance(v, dict)]
         )
         prompt = f"""
-        The user has asked a financial question. Here's their financial snapshot:
+        You are a friendly and knowledgeable financial assistant. Respond naturally and conversationally.
+
+        Financial Summary:
         {query.financial_summary}
 
-        Current macroeconomic debt data:
-        {debt_context}
+        User's Question:
+        {query.question}
 
-        Question: {query.question}
-
-        Give clear, practical advice on budgeting, debt repayment, and saving strategies considering both personal and national debt trends.
+        Provide a clear, concise, and helpful response. If appropriate, ask a follow-up question to keep the conversation going.
         """
         response = model.generate_content(prompt)
-        return {"response": response.text.strip()}
+        follow_up = "Is there anything else you'd like to know about your finances?"
+        full_response = f"{response.text.strip()} {follow_up}"
+        return {"response": full_response}
     except Exception as e:
         print("❌ Gemini API error:", e)
         return {"error": str(e)}
@@ -88,28 +90,11 @@ def extract_transactions_from_text(text):
     return pd.DataFrame(transactions)
 
 @app.post("/upload")
-async def upload_statement(file: UploadFile = File(...)):
-    contents = await file.read()
-    filename = file.filename.lower()
-
-    if filename.endswith(".csv"):
-        df = pd.read_csv(io.BytesIO(contents))
-    elif filename.endswith(".xlsx"):
-        df = pd.read_excel(io.BytesIO(contents))
-    elif filename.endswith(".pdf"):
-        text_data = ""
-        with pdfplumber.open(io.BytesIO(contents)) as pdf:
-            for page in pdf.pages:
-                text_data += page.extract_text() + "\n"
-        df = extract_transactions_from_text(text_data)
-    else:
-        return {"summary": "Unsupported file format."}
-
-    if 'Withdrawal' in df.columns and 'Deposit' in df.columns:
-        income = df['Deposit'].sum()
-        expenses = df['Withdrawal'].sum()
-        summary = f"Monthly Income: ${income:.2f}, Monthly Expenses: ${expenses:.2f}"
-    else:
-        summary = "Invalid format: File must include 'Withdrawal' and 'Deposit' columns."
-
-    return {"summary": summary}
+async def upload_file(file: UploadFile):
+    try:
+        # Simulate processing the file and generating a summary
+        content = await file.read()
+        summary = "Income: $5000\nExpenses: $2000\nSavings: $3000"
+        return {"summary": summary}
+    except Exception as e:
+        return {"error": f"Failed to process file: {str(e)}"}

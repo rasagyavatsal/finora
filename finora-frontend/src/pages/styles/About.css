@@ -14,7 +14,11 @@ body {
     align-items: center;
     min-height: 100vh;
     text-align: center;
-    padding: 20px;
+    padding: 40px;
+    background: linear-gradient(to bottom right, #90e0ef, #0077b6);
+    color: #1f2937;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
   /* Header Section */
@@ -106,4 +110,16 @@ body {
       padding: 10px 20px; /* Smaller button on mobile */
     }
   }
+
+  .about-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+  }
   
+  .about-text {
+    font-size: 1.25rem;
+    color: #2d3748;
+    line-height: 1.8;
+  }

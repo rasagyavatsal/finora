@@ -28,7 +28,77 @@
 
 .home-button:hover {
   transform: scale(1.05);
-  background-color: #1D9BF0;
+}
+
+.chat-container {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.chat-message {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.chat-message.user {
+  justify-content: flex-end;
+}
+
+.chat-message.bot {
+  justify-content: flex-start;
+}
+
+.chat-bubble {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.chat-bubble.user {
+  background: linear-gradient(45deg, #1D9BF0, #4e73df);
+  color: white;
+}
+
+.chat-bubble.bot {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.chat-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #0077b6;
+  margin-right: 10px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+}
+
+.chat-upload-button {
+  background-color: #0077b6;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.chat-upload-button:hover {
+  background-color: #0096c7;
 }
 
 footer {
