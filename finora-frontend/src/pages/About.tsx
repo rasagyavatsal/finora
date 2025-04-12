@@ -1,12 +1,15 @@
 // src/pages/About.tsx
 import React from 'react';
+import { Box, Text } from '@chakra-ui/react';
 
 const About: React.FC = () => {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>About Finora</h1>
-      <p>Finora helps you manage your debt and make smarter financial decisions!</p>
-    </div>
+    <Box p={6}>
+      <Text fontSize="4xl" mb={4}>About Finora</Text>
+      <Text fontSize="xl">
+        Finora helps you manage your debt and make smarter financial decisions!
+      </Text>
+    </Box>
   );
 };
 
