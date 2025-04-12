@@ -41,6 +41,7 @@ def test_chat(summary, question):
 
 if __name__ == "__main__":
     print("🧾 Uploading bank statement...")
-    summary = test_upload("/Users/rasagyavatsal/finora/backend/test_files/Acct Statement_XX0613_12042025.pdf")
+    summary = test_upload(r"C:\MAIN\Code\Finora\finora\backend\test_files\Acct Statement_XX0613_12042025.pdf")
+    print("\n📝 Financial Summary:")
     print("\n💬 Asking financial question...")
     test_chat(summary, "How can I budget better and repay my debts faster?")

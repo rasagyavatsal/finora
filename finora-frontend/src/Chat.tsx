@@ -1,106 +1,85 @@
-import React, { useState, useRef } from 'react';
-import { FiSend } from 'react-icons/fi';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+
+interface Message {
+  type: "user" | "bot";
+  text: string;
+}
 
 const Chat = () => {
-  const [messages, setMessages] = useState<{ type: 'user' | 'bot'; text: string }[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
-  const [file, setFile] = useState<File | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
+  // Scroll to the bottom when a new message is added
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
-    const userMessage = { type: 'user', text: input };
+  // Handle sending a message
+  const handleSend = async () => {
+    if (input.trim() === '') return;
+
+    // Add user message to the chat
+    const userMessage: Message = { type: 'user', text: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
 
-    // Mock Gemini API call - Replace with actual logic
-    const botResponse = {
-      type: 'bot',
-      text: `You said: "${input}" — I'll analyze this along with your bank statement soon.`,
-    };
+    // Mock API call - Replace with actual logic
+    try {
+      const response = await axios.post('http://localhost:8000/chat', {
+        question: input,
+        financial_summary: 'Summary of financial data here', // Replace with actual summary
+      });
 
-    setTimeout(() => {
-      setMessages((prev) => [...prev, botResponse]);
-      scrollToBottom();
-    }, 800);
-  };
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) setFile(selectedFile);
+      const botMessage: Message = {
+        type: 'bot',
+        text: response.data.response || 'Sorry, I didn\'t get that.',
+      };
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error communicating with the server:', error);
+    }
   };
 
   return (
-    <div className="bg-blue-50 min-h-screen flex flex-col">
-      <header className="bg-blue-600 p-4 text-white">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Finora AI Chat</h1>
-          <nav className="space-x-6">
-            <a href="/" className="hover:text-blue-200">Home</a>
-            <a href="/chat" className="hover:text-blue-200 font-bold underline">Chat</a>
-          </nav>
-        </div>
-      </header>
+    <div className="chat-container p-4 max-w-xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">💬 Chat with Gemini AI</h1>
 
-      <main className="flex-1 container mx-auto px-4 py-6">
-        <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">Upload your Bank Statement (CSV or PDF)</label>
-          <input
-            type="file"
-            accept=".csv,application/pdf"
-            onChange={handleFileUpload}
-            className="w-full bg-white border border-gray-300 rounded-md px-4 py-2"
-          />
-          {file && (
-            <p className="text-sm mt-2 text-green-600">
-              Uploaded: <strong>{file.name}</strong>
-            </p>
-          )}
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md p-4 h-[500px] overflow-y-auto mb-4">
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`my-2 p-3 rounded-lg max-w-xl ${
-                msg.type === 'user'
-                  ? 'ml-auto bg-blue-100 text-right'
-                  : 'mr-auto bg-gray-100'
-              }`}
-            >
-              {msg.text}
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
-
-        <div className="flex items-center gap-2">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            className="flex-1 p-3 border border-gray-300 rounded-md"
-            placeholder="Ask Finora anything..."
-          />
-          <button
-            onClick={handleSend}
-            className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-md"
+      {/* Chat window */}
+      <div className="chat-box p-4 mb-4 bg-gray-100 rounded border">
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`message ${message.type === 'user' ? 'user-message' : 'bot-message'} mb-2`}
           >
-            <FiSend />
-          </button>
-        </div>
-      </main>
+            <strong>{message.type === 'user' ? 'You' : 'Bot'}:</strong>
+            <p>{message.text}</p>
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
 
-      <footer className="bg-blue-600 text-white py-4">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2025 Finora. All rights reserved.</p>
-        </div>
-      </footer>
+      {/* Input area */}
+      <div className="input-area flex items-center space-x-2">
+        <input
+          type="text"
+          className="flex-grow p-2 border border-gray-300 rounded"
+          placeholder="Type your question..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button
+          onClick={handleSend}
+          className="bg-blue-500 text-white p-2 rounded"
+        >
+          Send
+        </button>
+      </div>
     </div>
   );
 };
