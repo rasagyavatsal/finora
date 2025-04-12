@@ -1,15 +1,17 @@
-// src/pages/About.tsx
-import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import React from "react";
 
-const About: React.FC = () => {
+const About = () => {
   return (
-    <Box p={6}>
-      <Text fontSize="4xl" mb={4}>About Finora</Text>
-      <Text fontSize="xl">
-        Finora helps you manage your debt and make smarter financial decisions!
-      </Text>
-    </Box>
+    <div className="about-page p-6">
+      <h1 className="text-3xl font-bold mb-4">About Gemini AI - Financial Assistant</h1>
+      <p>
+        Gemini is your personal AI assistant for managing finances. You can upload your bank statements,
+        get summaries of your financial data, and ask questions related to your spending and saving habits.
+      </p>
+      <p>
+        Our AI provides insightful financial advice to help you make informed decisions about your money.
+      </p>
+    </div>
   );
 };
 
