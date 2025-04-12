@@ -1,7 +1,7 @@
-// src/pages/About.tsx
+// src/pages/Contact.tsx
 import React from 'react';
 
-const About = () => {
+const Contact = () => {
   return (
     <div className="bg-blue-50 min-h-screen text-gray-900">
       <header className="bg-blue-600 p-4 text-white">
@@ -16,18 +16,33 @@ const About = () => {
       </header>
 
       <main className="container mx-auto px-4 py-20 text-center">
-        <h2 className="text-4xl font-bold text-blue-700">About Finora</h2>
+        <h2 className="text-4xl font-bold text-blue-700">Contact Us</h2>
         <p className="text-lg text-gray-700 mt-4">
-          Finora is your AI-driven financial assistant, designed to help you manage your finances with ease and efficiency.
+          We’d love to hear from you! Reach out to us for any inquiries or support.
         </p>
 
-        <div className="mt-10">
-          <a href="/">
-            <button className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700">
-              Back to Home
-            </button>
-          </a>
-        </div>
+        <form className="mt-10 max-w-lg mx-auto">
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="w-full p-3 mb-4 border rounded-lg"
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="w-full p-3 mb-4 border rounded-lg"
+          />
+          <textarea
+            placeholder="Your Message"
+            className="w-full p-3 mb-4 border rounded-lg"
+          ></textarea>
+          <button
+            type="submit"
+            className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700"
+          >
+            Send Message
+          </button>
+        </form>
       </main>
 
       <footer className="bg-blue-600 text-white py-4">
@@ -39,4 +54,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Contact;
